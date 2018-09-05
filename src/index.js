@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import ContentProcess from './content/content-process'
-window.onload = () => {
-  console.info('************start ')
+import ComponentStyles from '../node_modules/alpheios-components/dist/style/style.min.css' // eslint-disable-line
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  console.info('**********************DOMContentLoaded start', event.target)
   let contentProcess = new ContentProcess()
   contentProcess.initialize()
-  console.info('************finish ')
-}
+  console.info('**********************DOMContentLoaded finish', contentProcess)
+})

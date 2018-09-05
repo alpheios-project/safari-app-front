@@ -3,7 +3,7 @@
 
 import { Constants } from 'alpheios-data-models'
 import { UIController, HTMLSelector, LexicalQuery, LanguageOptionDefaults, ContentOptionDefaults,
-  UIOptionDefaults, Options, AnnotationQuery, ExtensionSyncStorage, MouseDblClick } from 'alpheios-components'
+  UIOptionDefaults, Options, AnnotationQuery, LocalStorageArea, MouseDblClick } from 'alpheios-components'
 
 import TabScript from '@/lib/content/tab-script'
 
@@ -13,18 +13,15 @@ export default class ContentProcess {
     this.state.status = TabScript.statuses.script.PENDING
     this.state.panelStatus = TabScript.statuses.panel.CLOSED
 
-    this.options = new Options(ContentOptionDefaults, ExtensionSyncStorage)
-    this.resourceOptions = new Options(LanguageOptionDefaults, ExtensionSyncStorage)
-    this.uiOptions = new Options(UIOptionDefaults, ExtensionSyncStorage)
+    this.options = new Options(ContentOptionDefaults, LocalStorageArea)
+    this.resourceOptions = new Options(LanguageOptionDefaults, LocalStorageArea)
+    this.uiOptions = new Options(UIOptionDefaults, LocalStorageArea)
 
     this.ui = new UIController(this.state, this.options, this.resourceOptions, this.uiOptions)
-    console.info('*******************ContentProcess constructor', this.ui)
   }
 
   initialize () {
     safari.self.addEventListener('message', this.messageHandler)
-
-    this.test()
     this.ui.panel.open()
   }
 

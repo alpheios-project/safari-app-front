@@ -1,3 +1,4 @@
+import VueLoaderPlugin from '../node_modules/vue-loader/lib/plugin.js'
 import path from 'path'
 const projectRoot = process.cwd()
 
@@ -11,7 +12,10 @@ const webpack = {
         'alpheios-components': path.join(projectRoot, 'node_modules/alpheios-components/dist/alpheios-components.js'),
         '@': path.join(projectRoot, 'src')
       }
-    }
+    },
+    plugins: [
+      new VueLoaderPlugin()
+    ]
   },
 
   production: {
