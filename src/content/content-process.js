@@ -48,7 +48,7 @@ export default class ContentProcess {
     document.body.addEventListener('Alpheios_Page_Load', this.updateAnnotations.bind(this))
 
     document.body.addEventListener('Alpheios_Options_Loaded', this.updatePanelOnActivation.bind(this))
-    this.reactivate()
+    // this.reactivate()
   }
 
   get isActive () {
@@ -134,13 +134,13 @@ export default class ContentProcess {
       if (diff.has('panelStatus')) {
         if (diff.panelStatus === TabScript.statuses.panel.OPEN) { this.ui.panel.open() } else { this.ui.panel.close() }
       }
-      // this.updatePanelOnActivation()
+      this.updatePanelOnActivation()
       if (diff.has('tab') && diff.tab) {
         this.ui.changeTab(diff.tab)
       }
     }
 
-    // safari.extension.dispatchMessage('messageToBack', new StateResponse(message.body, this.state))
+    safari.extension.dispatchMessage('messageToBack', new StateResponse(message.body, this.state))
   }
 
   sendStateToBackground () {
@@ -219,6 +219,7 @@ export default class ContentProcess {
   }
 
   updatePanelOnActivation () {
+    console.info('***********************updatePanelOnActivation', this.state)
     if (this.isActive && this.ui.uiOptions.items.panelOnActivate.currentValue && !this.ui.panel.isOpen()) {
       this.ui.panel.open()
     }
