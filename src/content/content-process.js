@@ -49,6 +49,7 @@ export default class ContentProcess {
 
     document.body.addEventListener('Alpheios_Options_Loaded', this.updatePanelOnActivation.bind(this))
     // this.reactivate()
+    this.sendStateToBackground('initialize')
   }
 
   get isActive () {
@@ -139,12 +140,10 @@ export default class ContentProcess {
         this.ui.changeTab(diff.tab)
       }
     }
-
-    safari.extension.dispatchMessage('messageToBack', new StateResponse(message.body, this.state))
   }
 
-  sendStateToBackground () {
-    safari.extension.dispatchMessage('messageToBack', new StateMessage(this.state))
+  sendStateToBackground (messageName) {
+    safari.extension.dispatchMessage(messageName, new StateMessage(this.state))
   }
 
   handleEscapeKey (event) {
@@ -223,5 +222,6 @@ export default class ContentProcess {
     if (this.isActive && this.ui.uiOptions.items.panelOnActivate.currentValue && !this.ui.panel.isOpen()) {
       this.ui.panel.open()
     }
+    this.sendStateToBackground()
   }
 }
