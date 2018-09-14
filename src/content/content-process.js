@@ -49,7 +49,7 @@ export default class ContentProcess {
 
     document.body.addEventListener('Alpheios_Options_Loaded', this.updatePanelOnActivation.bind(this))
     // this.reactivate()
-    this.sendStateToBackground('initialize')
+    this.sendStateToBackground('updateState')
   }
 
   get isActive () {
@@ -218,10 +218,9 @@ export default class ContentProcess {
   }
 
   updatePanelOnActivation () {
-    console.info('***********************updatePanelOnActivation', this.state)
     if (this.isActive && this.ui.uiOptions.items.panelOnActivate.currentValue && !this.ui.panel.isOpen()) {
       this.ui.panel.open()
     }
-    this.sendStateToBackground()
+    this.sendStateToBackground('updateState')
   }
 }
