@@ -3,7 +3,6 @@
 import { Constants } from 'alpheios-data-models'
 import { AlpheiosTuftsAdapter } from 'alpheios-morph-client'
 import { Lexicons } from 'alpheios-lexicon-client'
-import { ObjectMonitor as ExpObjMon } from 'alpheios-experience'
 
 import Message from '@/lib/messaging/message/message'
 import MessagingService from '@/lib/messaging/service'
@@ -167,23 +166,15 @@ export default class ContentProcess {
       let textSelector = htmlSelector.createTextSelector()
 
       if (!textSelector.isEmpty()) {
-        ExpObjMon.track(
-          LexicalQuery.create(textSelector, {
-            htmlSelector: htmlSelector,
-            uiController: this.ui,
-            maAdapter: this.maAdapter,
-            lexicons: Lexicons,
-            resourceOptions: this.resourceOptions,
-            siteOptions: [],
-            langOpts: { [Constants.LANG_PERSIAN]: { lookupMorphLast: true } } // TODO this should be externalized
-          }),
-          {
-            experience: 'Get word data',
-            actions: [
-              { name: 'getData', action: ExpObjMon.actions.START, event: ExpObjMon.events.GET },
-              { name: 'finalize', action: ExpObjMon.actions.STOP, event: ExpObjMon.events.GET }
-            ]
-          })
+        LexicalQuery.create(textSelector, {
+          htmlSelector: htmlSelector,
+          uiController: this.ui,
+          maAdapter: this.maAdapter,
+          lexicons: Lexicons,
+          resourceOptions: this.resourceOptions,
+          siteOptions: [],
+          langOpts: { [Constants.LANG_PERSIAN]: { lookupMorphLast: true } } // TODO this should be externalized
+        })
           .getData()
       }
     }
