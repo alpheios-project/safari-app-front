@@ -4,7 +4,8 @@
   "description": "A WebExtension implementation of Alpheios for Safari App Extension",
   "main": "index.js",
   "scripts": {
-    "build": "standard --fix && node --experimental-modules ./node_modules/alpheios-node-build/dist/build.mjs all all vue"
+    "build": "standard --fix && node --experimental-modules ./node_modules/alpheios-node-build/dist/build.mjs all all vue",
+    "build-dev": "standard --fix && node --experimental-modules ./node_modules/alpheios-node-build/dist/build.mjs all development vue"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,7 @@
   },
   "homepage": "https://github.com/alpheios-project/safariappextension#readme",
   "devDependencies": {
-    "alpheios-components": "github:alpheios-project/components#for-safari-extension",
+    "alpheios-components": "github:alpheios-project/components",
     "alpheios-data-models": "github:alpheios-project/data-models",
     "alpheios-experience": "github:alpheios-project/experience",
     "alpheios-inflection-tables": "github:alpheios-project/inflection-tables",
@@ -29,9 +30,9 @@
     "bytes": "^3.0.0",
     "chalk": "^2.4.1",
     "css-loader": "*",
-    "eslint": "^5.4.0",
+    "eslint": "^5.7.0",
     "eslint-plugin-import": "^2.14.0",
-    "file-loader": "^1.1.11",
+    "file-loader": "^2.0.0",
     "html-loader": "*",
     "intl-messageformat": "^2.2.0",
     "mkdirp": "^0.5.1",
